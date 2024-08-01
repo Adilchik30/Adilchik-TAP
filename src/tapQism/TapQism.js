@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Username } from "../username/Username";
 import "./TapQism.css";
-import logo from "../assets/logo2.png";
 
 function TapQism() {
   const [coins, setCoins] = useState(() => {
@@ -9,28 +8,36 @@ function TapQism() {
     return savedCoins !== null ? Number(savedCoins) : 0;
   });
 
-  const [clickEffects, setClickEffects] = useState([]);
-
   useEffect(() => {
     localStorage.setItem('coins', coins);
   }, [coins]);
 
-  const handleImageClick = (event) => {
-    setCoins(coins + 1);
+  const handleImageClick = (e) => {
+    const newCoins = coins + 5;
+    setCoins(newCoins);
 
-    const newEffect = {
-      id: Date.now(),
-      x: event.clientX,
-      y: event.clientY,
-    };
+    showClickEffect(e.clientX, e.clientY);
+  };
 
-    setClickEffects((prevEffects) => [...prevEffects, newEffect]);
-
+  const showClickEffect = (x, y) => {
+    const effect = document.createElement('div');
+    effect.className = 'click-effect';
+    effect.innerText = '+5';
+    effect.style.left = `${x}px`;
+    effect.style.top = `${y}px`;
+    document.body.appendChild(effect);
     setTimeout(() => {
-      setClickEffects((prevEffects) =>
-        prevEffects.filter((effect) => effect.id !== newEffect.id)
-      );
+      document.body.removeChild(effect);
     }, 1000);
+  };
+
+  const formatCoins = (num) => {
+    if (num >= 1000000) {
+      return `${(num / 1000000).toFixed(1)}M`;
+    } else if (num >= 1000) {
+      return `${(num / 1000).toFixed(1)}K`;
+    }
+    return num;
   };
 
   return (
@@ -47,23 +54,16 @@ function TapQism() {
         </div><br />
         <div className="tap_all_coins_part">
           <div>
-            <img src={logo} alt="Logo" />
-            <p>{coins}</p><br />
+            <img src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" alt="Logo" />
+            <p>{formatCoins(coins)}</p><br />
           </div>
         </div>
         <div className="big_tap_btn_part">
-          <img src={logo} alt="Logo" onClick={handleImageClick} />
+          <img src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" alt="Logo" onClick={handleImageClick} />
         </div>
         <div className="boost_coin_part"></div>
         <div className="footer_part"></div>
       </div>
-      {clickEffects.map((effect) => (
-        <div
-          key={effect.id}
-          className="click-effect"
-          style={{ top: effect.y, left: effect.x }}
-        ></div>
-      ))}
     </div>
   );
 }

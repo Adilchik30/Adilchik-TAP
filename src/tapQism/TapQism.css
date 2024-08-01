@@ -1,5 +1,7 @@
 .tap_container {
+  height: 100vh;
   display: flex;
+  background: #ddd;
   flex-direction: column;
   align-items: center;
   font-family: Arial, sans-serif;
@@ -54,18 +56,15 @@
 }
 
 .big_tap_btn_part img {
-  width: 420px;
-  height: 380px;
+  width: 380px;
+  height: 370px;
   cursor: pointer;
 }
 
-
 .click-effect {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: green;
-  border-radius: 50%;
+  font-size: 30px;
+  color: black;
   pointer-events: none;
   animation: fadeOut 1s forwards;
 }
@@ -73,10 +72,10 @@
 @keyframes fadeOut {
   0% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0);
   }
   100% {
     opacity: 0;
-    transform: scale(2);
+    transform: translateY(-20px);
   }
 }
