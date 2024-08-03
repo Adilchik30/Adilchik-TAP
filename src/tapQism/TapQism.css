@@ -1,19 +1,25 @@
 .tap_container {
-  height: 100vh;
   display: flex;
-  background: #ddd;
   flex-direction: column;
+  background: #333;
+  height: 100vh;
   align-items: center;
   font-family: Arial, sans-serif;
   padding: 20px;
 }
 
+.username_and_tap {
+  height: 100vh;
+  background: white;
+}
+
 .tap_username {
+  background: rgb(182, 126, 255);
   width: 450px;
-  margin-bottom: 20px;
 }
 
 .tap_part {
+  border-radius: 20px;
   width: 450px;
   text-align: center;
 }
@@ -28,26 +34,29 @@
 }
 
 .tap_all_coins_part img {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   vertical-align: middle;
 }
 
 .tap_all_coins_part p {
   display: inline;
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: #333;
 }
 
 .big_tap_btn_part {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .profit {
-  width: 270px;
-  height: 70px;
+  border-radius: 15px;
+  width: 300px;
+  height: 80px;
   align-items: center;
   text-align: center;
+  font-family: sans-serif;
   margin: auto;
   justify-content: center;
   display: flex;
@@ -56,26 +65,85 @@
 }
 
 .big_tap_btn_part img {
-  width: 380px;
-  height: 370px;
+  width: 300px;
+  height: 290px;
   cursor: pointer;
 }
 
 .click-effect {
   position: absolute;
-  font-size: 30px;
-  color: black;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   pointer-events: none;
   animation: fadeOut 1s forwards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  transform: translate(-50%, -50%);
 }
 
 @keyframes fadeOut {
   0% {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(2);
   }
+}
+
+.boost_coin_part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  color: white;
+  width: 450px;
+  margin-top: 20px;
+}
+
+.boost_info {
+  margin: auto;
+  display: flex;
+  color: #333;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.boost_info svg {
+  background: yellow;
+}
+.boost_info span {
+  margin: auto;
+}
+.lightning-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.boost_button {
+  background: #ff5f5f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.boost_button:disabled {
+  background: #888;
+  cursor: not-allowed;
+}
+
+.boost_button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
 }
