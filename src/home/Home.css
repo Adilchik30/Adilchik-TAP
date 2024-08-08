@@ -9,26 +9,15 @@
 }
 
 .username_and_tap {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex: 1;
-  width: 450px;
+  height: 100vh;
   background: white;
-  overflow: auto;
-}
-
-.tap_username {
-  background: rgb(182, 126, 255);
-  width: 100%;
-  padding: 20px;
 }
 
 .tap_part {
   border-radius: 20px;
-  width: 100%;
+  height: 100vh;
+  width: 450px;
   text-align: center;
-  margin: auto;
 }
 
 .profit h2 {
@@ -38,6 +27,7 @@
 
 .tap_all_coins_part {
   margin-bottom: 20px;
+  align-items: center;
 }
 
 .tap_all_coins_part img {
@@ -87,9 +77,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
-  background: rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
+}
+
+.click-effect-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 
 @keyframes fadeOut {
@@ -110,8 +104,7 @@
   padding: 10px;
   border-radius: 10px;
   color: white;
-  width: 100%;
-  max-width: 450px;
+  width: 450px;
   margin-top: 20px;
 }
 
@@ -163,20 +156,19 @@
 .footer {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  padding: 40px;
   align-items: center;
-  background: #333;
+  margin: 50px 0 0 0;
+  background-color: #333;
   color: white;
-  width: 100%;
-  max-width: 450px;
+  max-height: 85px;
   font-size: 15px;
   z-index: 2;
-  position: fixed;
-  bottom: 0;
 }
 
 .footer-item {
   height: 60px;
+  justify-content: center;
   width: 70px;
   color: white;
   display: flex;
@@ -189,7 +181,7 @@
   width: 20px;
   height: 20px;
   margin-bottom: 5px;
-  color: white;
+  color: #fff;
 }
 
 .footer-icon {
