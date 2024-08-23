@@ -1,0 +1,70 @@
+.mine-container {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.mine-title {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.mine-items {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mine-item {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: 30%;
+  text-align: center;
+}
+
+.mine-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.mine-item-name {
+  font-size: 18px;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.mine-item-description {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.mine-item-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+.mine-item-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.mine-item-button:hover {
+  background-color: #218838;
+}

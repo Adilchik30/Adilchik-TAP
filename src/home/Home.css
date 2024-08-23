@@ -9,42 +9,15 @@
 }
 
 .username_and_tap {
-  height: 100vh;
+  height: auto;
   background: white;
 }
 
 .tap_part {
   border-radius: 20px;
-  height: 100vh;
+  height: 600px;
   width: 450px;
   text-align: center;
-}
-
-.profit h2 {
-  font-size: 2em;
-  color: #333;
-}
-
-.tap_all_coins_part {
-  margin-bottom: 20px;
-  align-items: center;
-}
-
-.tap_all_coins_part img {
-  width: 30px;
-  height: 30px;
-  vertical-align: middle;
-}
-
-.tap_all_coins_part p {
-  display: inline;
-  font-size: 1.3em;
-  color: #333;
-}
-
-.big_tap_btn_part {
-  margin-bottom: 20px;
-  position: relative;
 }
 
 .profit {
@@ -61,39 +34,59 @@
   background: rgb(255, 207, 215);
 }
 
-.big_tap_btn_part img {
+.profit h3 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+.tap_all_coins_part {
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.tap_all_coins_part p {
+  display: inline;
+  font-size: 1.3em;
+  color: #333;
+}
+
+.big_tap_btn_part {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.big_tap_btn_part .big_tap_btn {
   width: 300px;
   height: 290px;
   cursor: pointer;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  border-radius: 10px;
 }
 
 .click-effect {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
   pointer-events: none;
-  animation: fadeOut 1s forwards;
+  color: red;
+  font-size: 20px;
+  animation: clickEffectAnimation 1s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
   transform: translate(-50%, -50%);
 }
 
-.click-effect-image {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-@keyframes fadeOut {
+@keyframes clickEffectAnimation {
   0% {
-    opacity: 1;
     transform: scale(1);
+    opacity: 1;
   }
   100% {
-    opacity: 0;
     transform: scale(2);
+    opacity: 0;
   }
 }
 
@@ -105,7 +98,6 @@
   border-radius: 10px;
   color: white;
   width: 450px;
-  margin-top: 20px;
 }
 
 .boost_info {
@@ -126,44 +118,16 @@
   margin: auto;
 }
 
-.lightning-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.boost_button {
-  background: #ff5f5f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 5px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-}
-
-.boost_button:disabled {
-  background: #888;
-  cursor: not-allowed;
-}
-
-.boost_button img {
-  width: 20px;
-  height: 20px;
-  margin-right: 5px;
-}
-
 .footer {
   display: flex;
   justify-content: space-between;
-  padding: 40px;
+  padding: 20px;
   align-items: center;
   margin: 50px 0 0 0;
   background-color: #333;
   color: white;
   max-height: 85px;
   font-size: 15px;
-  z-index: 2;
 }
 
 .footer-item {
@@ -183,7 +147,6 @@
   margin-bottom: 5px;
   color: #fff;
 }
-
-.footer-icon {
-  margin-bottom: 5px;
+.navlink.active {
+  color: aqua;
 }

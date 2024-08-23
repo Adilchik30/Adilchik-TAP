@@ -1,0 +1,16 @@
+.promocode_image {
+  gap: 23px;
+  display: flex;
+  justify-content: center;
+}
+.where_and_when {
+    gap: 10px;
+    display: block;
+}
+.where_and_when p {
+    text-align: center;
+font-size: 18px;
+}
+.where_and_when h2 {
+    text-align: center;
+}
