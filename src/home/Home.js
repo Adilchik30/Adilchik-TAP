@@ -8,18 +8,17 @@ import { Link, NavLink } from "react-router-dom";
 
 function Home() {
   const initialCoins = 0;
-  const initialBoostCoins = 100; // Ensure a reasonable starting value
-
+  const initialBoostCoins = 100;  // Ensure a reasonable starting value
+  
   const getValidNumber = (value, defaultValue) => {
     const number = Number(value);
     return !isNaN(number) && isFinite(number) ? number : defaultValue;
   };
-
+  
   const [totalProfitPerHour, setTotalProfitPerHour] = useState(() => {
     const savedProfit = localStorage.getItem("totalProfitPerHour");
     return getValidNumber(savedProfit, 0); // Ensure it defaults to 0
   });
-
   const [coins, setCoins] = useState(() => {
     const savedCoins = localStorage.getItem("coins");
     return getValidNumber(savedCoins, initialCoins);
@@ -64,19 +63,22 @@ function Home() {
       setBoostCoins((prevBoostCoins) => Math.min(prevBoostCoins + 1, 500));
     };
 
-    const id = setInterval(incrementBoostCoins, 600);
-    return () => clearInterval(id);
-  }, []);
+    if (boostCoins <= 500) {
+      const id = setInterval(incrementBoostCoins, 600);
+      return () => clearInterval(id);
+    }
+  }, [boostCoins]);
 
   useEffect(() => {
-    const profitPerMinute = totalProfitPerHour / 60;
+    const profitPerMinute = totalProfitPerHour / 60; // Updated to per minute
 
     const updateCoinsInterval = setInterval(() => {
       setCoins((prevTotal) => {
         const newTotal = prevTotal + profitPerMinute;
+        if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
         return Math.max(newTotal, 0); // Ensure coins do not go below 0
       });
-    }, 10000);
+    }, 10000); // Update every 10 seconds
 
     return () => clearInterval(updateCoinsInterval);
   }, [totalProfitPerHour]);
@@ -95,9 +97,9 @@ function Home() {
 
   const handleImageClick = (e) => {
     if (coins > 0 && boostCoins > 0) {
-      setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
+      setCoins((prevCoins) => Math.max(prevCoins + 1, 0)); // Decrement coins
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
-
+  
       const imgRect = e.target.getBoundingClientRect();
       showClickEffect(
         e.clientX - imgRect.left,
@@ -109,7 +111,7 @@ function Home() {
         messageElement.style.display = "block";
         setTimeout(() => {
           messageElement.style.display = "none";
-        }, 2000);
+        }, 2000); // Hide message after 2 seconds
       }
     }
   };
@@ -118,6 +120,7 @@ function Home() {
     <div className="tap_container" ref={containerRef}>
       <div className="tap_part">
         <div className="username_and_tap">
+          <br />
           <div className="tap_profit_part">
             <div className="profit">
               <h3>Soatiga tajriba: {numberFormatter.format(totalProfitPerHour)}</h3>
@@ -131,6 +134,7 @@ function Home() {
                 onClick={handleImageClick}
               />
               <p>{Math.floor(coins)}</p>
+              <br />
             </div>
           </div>
           <div className="big_tap_btn_part">
@@ -184,16 +188,16 @@ function Home() {
             </NavLink>
           </footer>
         </div>
+        {effects.map((effect) => (
+          <div
+            key={effect.id}
+            className="click-effect"
+            style={{ left: effect.x, top: effect.y }}
+          >
+            +1
+          </div>
+        ))}
       </div>
-      {effects.map((effect) => (
-        <div
-          key={effect.id}
-          className="click-effect"
-          style={{ left: effect.x, top: effect.y }}
-        >
-          +1
-        </div>
-      ))}
     </div>
   );
 }
