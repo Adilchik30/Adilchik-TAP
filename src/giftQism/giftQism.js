@@ -41,7 +41,9 @@ const GiftQism = () => {
           15 001 dan 20 000 gacha — 7 ta imkoniyat <br />
           20 001 dan 25 000 gacha — 8 ta imkoniyat <br />
           25 001 dan 30 000 gacha — 9 ta imkoniyat <br />
-          30 001 dan — 10 ta imkoniyat <br /><br /><br />
+          30 001 dan — 10 ta imkoniyat <br />
+          <br />
+          <br />
           Imkoniyatlar qanchalik koʻp boʻlsa, Uzum Marketda xaridlar uchun
           promokodni yutib olish ehtimoli shunchalik yuqori boʻladi
         </p>

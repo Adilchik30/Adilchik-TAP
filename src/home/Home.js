@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { SlEnergy } from "react-icons/sl";
-import { FaMoneyBillTrendUp, FaGift, FaPeoplePulling } from "react-icons/fa6";
+import { FaMoneyBill, FaGift, FaPeoplePulling } from "react-icons/fa6";
 import { MdTaskAlt } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import "./Home.css";
 import { Link, NavLink } from "react-router-dom";
-import Mine from '../mineQism/mineQism'; // Import the Mine component
 
 function Home() {
   const initialCoins = 0;
@@ -29,6 +28,9 @@ function Home() {
     const savedBoostCoins = localStorage.getItem("boostCoins");
     return getValidNumber(savedBoostCoins, initialBoostCoins);
   });
+
+  const [effects, setEffects] = useState([]);
+  const containerRef = useRef(null);
 
   const numberFormatter = new Intl.NumberFormat('en-US', {
     style: 'decimal',
@@ -68,19 +70,31 @@ function Home() {
   }, [boostCoins]);
 
   useEffect(() => {
-    const profitPerMinute = totalProfitPerHour / 1;
+    const profitPerMinute = totalProfitPerHour / 60; // Updated to per minute
     console.log(`Profit per minute: ${profitPerMinute}`); // Debugging line
 
     const updateCoinsInterval = setInterval(() => {
       setCoins((prevTotal) => {
-        const newTotal = prevTotal + profitPerMinute / 1; // Update every 10 seconds
+        const newTotal = prevTotal + profitPerMinute;
         if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
         return Math.max(newTotal, 0); // Ensure coins do not go below 0
       });
-    }, 3600000); // Update every 10 seconds
+    }, 10000); // Update every 10 seconds
 
     return () => clearInterval(updateCoinsInterval);
   }, [totalProfitPerHour]);
+
+  const showClickEffect = (x, y) => {
+    setEffects((prevEffects) => [
+      ...prevEffects,
+      { x, y, id: Date.now() }
+    ]);
+    setTimeout(() => {
+      setEffects((prevEffects) =>
+        prevEffects.filter((effect) => effect.id !== Date.now())
+      );
+    }, 1000);
+  };
 
   const handleImageClick = (e) => {
     if (coins > 0 && boostCoins > 0) {
@@ -90,8 +104,7 @@ function Home() {
       const imgRect = e.target.getBoundingClientRect();
       showClickEffect(
         e.clientX - imgRect.left,
-        e.clientY - imgRect.top,
-        e.target
+        e.clientY - imgRect.top
       );
     } else {
       const messageElement = document.getElementById("coins-error");
@@ -104,26 +117,8 @@ function Home() {
     }
   };
 
-  const showClickEffect = (x, y, target) => {
-    const effect = document.createElement("div");
-    effect.className = "click-effect";
-    effect.style.left = `${x}px`;
-    effect.style.top = `${y}px`;
-    effect.textContent = "+1";
-
-    target.appendChild(effect);
-
-    setTimeout(() => {
-      target.removeChild(effect);
-    }, 1000);
-  };
-
-  const updateTotalProfitPerHour = (profitIncrease) => {
-    setTotalProfitPerHour((prevTotal) => Math.max(prevTotal + profitIncrease, 0)); // Ensure profit does not go below 0
-  };
-
   return (
-    <div className="tap_container">
+    <div className="tap_container" ref={containerRef}>
       <div className="tap_part">
         <div className="username_and_tap">
           <br />
@@ -159,7 +154,7 @@ function Home() {
             </div>
           </div>
           <div id="coins-error" style={{ display: 'none', color: 'red' }}>
-            Not enough coins!
+            Kuchaytirish uchun yetarli tanga yo'q!
           </div>
           <footer className="footer">
             <Link to="/">
@@ -170,7 +165,7 @@ function Home() {
             </Link>
             <Link to="/mineCart">
               <div className="footer-item">
-                <FaMoneyBillTrendUp />
+                <FaMoneyBill />
                 {t.mine}
               </div>
             </Link>
@@ -200,6 +195,15 @@ function Home() {
           updateTotalProfitPerHour={updateTotalProfitPerHour}
         /> */}
       </div>
+      {effects.map((effect) => (
+        <div
+          key={effect.id}
+          className="click-effect"
+          style={{ left: effect.x, top: effect.y }}
+        >
+          +1
+        </div>
+      ))}
     </div>
   );
 }

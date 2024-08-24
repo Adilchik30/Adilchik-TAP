@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .promocode_image {
   gap: 23px;
   display: flex;
@@ -9,8 +11,9 @@
 }
 .where_and_when p {
     text-align: center;
-font-size: 18px;
+    font-size: 18px;
 }
 .where_and_when h2 {
+    font-family: 'Roboto', sans-serif;
     text-align: center;
 }

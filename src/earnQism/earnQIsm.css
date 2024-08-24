@@ -1,0 +1,69 @@
+.earn_title {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.daily_tasks {
+    margin-top: 20px;
+}
+
+.daily_tasks p, .tasks_list p {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.a_task {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    max-height: 75px;
+    background: #ddd;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+/* Targeting .a_task divs within .daily_tasks */
+.daily_tasks .a_task:nth-of-type(1) .task_img {
+    background-image: url('../assets/uzumvazifa/kalendar.jpg');
+}
+
+.daily_tasks .a_task:nth-of-type(2) .task_img {
+    background-image: url('../assets/uzumvazifa/youtube.png');
+}
+
+.daily_tasks .a_task:nth-of-type(3) .task_img {
+    background-image: url('../assets/uzumvazifa/telegram.png');
+}
+
+.daily_tasks .a_task:nth-of-type(4) .task_img {
+    background-image: url('../assets/uzumvazifa/uzumtezkor.png');
+}
+
+.daily_tasks .a_task:nth-of-type(5) .task_img {
+    background-image: url('../assets/uzumvazifa/uzum.png');
+}
+
+.daily_tasks .a_task:nth-of-type(6) .task_img {
+    background-image: url('../assets/uzumvazifa/uzumnasiya.png');
+}
+
+.daily_tasks .a_task:nth-of-type(7) .task_img {
+    background-image: url('../assets/uzumvazifa/kuryer.png');
+}
+
+.daily_tasks .a_task:nth-of-type(8) .task_img {
+    background-image: url('../assets/uzumvazifa/nasiya.png');
+}
+
+/* Style for .task_img */
+.task_img {
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    margin-right: 10px;
+}

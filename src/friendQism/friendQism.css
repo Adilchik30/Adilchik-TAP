@@ -1,0 +1,140 @@
+/* Container for the friend invite section */
+.add_friend_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: linear-gradient(90deg, #e8eaf6 0%, #fce4ec 100%);
+    border-radius: 15px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Gift icon placeholder */
+.gift_icon {
+    width: 50px;
+    height: 50px;
+    background: url('https://clipart-library.com/newimages/christmas-gift-clip-art-27.png') no-repeat center center;
+    background-size: contain;
+    margin-right: 15px;
+}
+
+/* Text container */
+.friend_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Invite text */
+.invite_text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+/* Bonus text */
+.bonus_text {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #555;
+    margin: 5px 0 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Coin icon placeholder */
+.coin_icon {
+    width: 16px;
+    height: 16px;
+    background: url('https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png') no-repeat center center;
+    background-size: contain;
+    margin-right: 5px;
+}
+
+/* Bonus amount */
+.bonus_amount {
+    font-weight: 700;
+    gap: 5px;
+    color: #000;
+}
+
+.add_friend {
+    justify-content: center;
+    display: block;
+    align-items: center;
+}
+
+.add_friend h2 {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}
+
+.add_friend p {
+    font-size: 17px;
+    text-align: center;
+}
+
+.refresh_part {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.refresh_part p {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.refresh_part svg {
+    width: 25px;
+    height: 25px;
+}
+
+.friend_list span {
+    font-size: 13px;
+}
+
+/* Copy part */
+.copy_part {
+    align-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 250px;
+}
+
+.copy_input {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.copy_button {
+    background-color: #4caf50;
+    color: white;
+    height: 29px;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.copy_button svg {
+    margin-right: 5px;
+}
+
+.copy_success {
+    color: #4caf50;
+    margin-top: 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+}

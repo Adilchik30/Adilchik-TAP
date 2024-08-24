@@ -3,6 +3,7 @@
   flex-direction: column;
   background: #333;
   height: auto;
+  position: relative;
   align-items: center;
   font-family: Arial, sans-serif;
   padding: 20px;
@@ -67,17 +68,19 @@
   border-radius: 10px;
 }
 
+/* Home.css */
 .click-effect {
   position: absolute;
-  pointer-events: none;
-  color: red;
-  font-size: 20px;
-  animation: clickEffectAnimation 1s ease-out;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform: translate(-50%, -50%);
+  background-color: #ddd;
+  color: #000;
+  font-size: 1.5rem;
+  padding: 5px;
+  border-radius: 50%;
+  pointer-events: none; /* Ensure it does not block clicks */
+  transition: opacity 1s;
+  opacity: 1;
 }
+
 
 @keyframes clickEffectAnimation {
   0% {
