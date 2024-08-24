@@ -14,7 +14,7 @@ export const Username = ({ chatId }) => {
   useEffect(() => {
     const fetchUsername = async () => {
       try {
-        const response = await axios.get(`http://localhost:2011/api/get-username/${chatId}`);
+        const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatId}`);
         setUsername(response.data.username);
       } catch (error) {
         console.error("Error fetching username:", error);
