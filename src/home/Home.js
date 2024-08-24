@@ -98,13 +98,14 @@ function Home() {
 
   const handleImageClick = (e) => {
     if (coins > 0 && boostCoins > 0) {
-      setCoins((prevCoins) => Math.max(prevCoins + 1, 0)); // Increment coins
+      setCoins((prevCoins) => Math.max(prevCoins - 1, 0)); // Decrement coins
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
   
       const imgRect = e.target.getBoundingClientRect();
       showClickEffect(
         e.clientX - imgRect.left,
-        e.clientY - imgRect.top
+        e.clientY - imgRect.top,
+        e.target
       );
     } else {
       const messageElement = document.getElementById("coins-error");
@@ -116,6 +117,7 @@ function Home() {
       }
     }
   };
+  
 
   return (
     <div className="tap_container" ref={containerRef}>
