@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './mineQism.css';
 
-function Mine({updateTotalProfitPerHour }) {
-  // Example items data
+function Mine({ updateTotalProfitPerHour }) {
+  const [localCoins, setLocalCoins] = useState(() => {
+    const savedCoins = localStorage.getItem("coins");
+    return Number(savedCoins) || 0;
+  });
+
+  useEffect(() => {
+    setLocalCoins(() => {
+      const savedCoins = localStorage.getItem("coins");
+      return Number(savedCoins) || 0;
+    });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("coins", localCoins.toString());
+  }, [localCoins]);
+
   const items = [
     {
       id: 1,
@@ -29,44 +44,36 @@ function Mine({updateTotalProfitPerHour }) {
       image: 'path/to/bronze-icon.png',
     },
   ];
-  const handlePurchase = (cost, profitPerHour) => {
-    setCoins((prevCoins) => {
-      if (prevCoins >= cost) {
-        const newCoins = prevCoins - cost;
-        updateTotalProfitPerHour(profitPerHour);
-        console.log(`Purchase successful. Coins updated from ${prevCoins} to ${newCoins}`);
-        return newCoins;
-      } else {
-        console.log(`Not enough coins. Current coins: ${prevCoins}, Required: ${cost}`);
-        alert('Yetarli tangalar mavjud emas!');
-        return prevCoins; // Return the previous value if not enough coins
-      }
-    });
+
+  const handleBuyItem = (item) => {
+    if (localCoins >= item.cost) {
+      setLocalCoins(localCoins - item.cost);
+      updateTotalProfitPerHour(item.profitPerHour); // Update the total profit per hour
+    } else {
+      alert('Yetarli tangangiz yo\'q!');
+    }
   };
-  const [coins, setCoins] = useState(0); // Example initial value
   
 
   return (
     <div className="mine-container">
-      <h2 className="mine-title">Tajriba Konlari</h2>
-      <div className="mine-items">
+      <h1>Tajriba sotib olish</h1>
+      <div className="items-list">
         {items.map((item) => (
-          <div key={item.id} className="mine-item">
-            <img src={item.image} alt={item.name} className="mine-item-image" />
-            <h3 className="mine-item-name">{item.name}</h3>
-            <p className="mine-item-description">{item.description}</p>
-            <div className="mine-item-details">
-              <span>Narxi: {item.cost} tanga</span>
-              <span>Soatiga foyda: {item.profitPerHour}</span>
+          <div key={item.id} className="item-card">
+            <img src={item.image} alt={item.name} className="item-image" />
+            <div className="item-details">
+              <h2>{item.name}</h2>
+              <p>{item.description}</p>
+              <p>Narx: {item.cost} tangalar</p>
+              <p>Soatlik daromad: {item.profitPerHour} tanga</p>
+              <button onClick={() => handleBuyItem(item)}>Sotib olish</button>
             </div>
-            <button
-              className="mine-item-button"
-              onClick={() => handlePurchase(item.cost, item.profitPerHour)}
-            >
-              Sotib olish
-            </button>
           </div>
         ))}
+      </div>
+      <div className="coins-display">
+        <h2>Sizda {localCoins} tanga bor</h2>
       </div>
     </div>
   );

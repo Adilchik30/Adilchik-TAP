@@ -1,11 +1,11 @@
 .tap_container {
   display: flex;
   flex-direction: column;
-  background: #333;
+  background: wheat;
   height: auto;
   position: relative;
   align-items: center;
-  font-family: Arial, sans-serif;
+  font-family:  sans-serif;
   padding: 20px;
 }
 
@@ -26,13 +26,13 @@
   width: 300px;
   height: 80px;
   align-items: center;
-  text-align: center;
-  font-family: sans-serif;
   margin: auto;
+    text-align: center;
+  font-family: sans-serif;
   justify-content: center;
   display: flex;
   gap: 10px;
-  background: rgb(255, 207, 215);
+  background: rgb(255, 252, 163);
 }
 
 .profit h3 {
@@ -41,6 +41,7 @@
 }
 
 .tap_all_coins_part {
+  margin-top: 10px;
   margin-bottom: 20px;
   align-items: center;
 }

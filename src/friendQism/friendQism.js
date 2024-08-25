@@ -13,7 +13,7 @@ const FriendQism = () => {
   };
 
   return (
-    <div>
+    <div className='friend_part'>
       <div className="add_friend">
         <h2>Do'stlaringizni taklif qiling!</h2>
         <p>Do'stingiz darajasi oshgani uchun darhol +5K va bonuslar olasiz</p>

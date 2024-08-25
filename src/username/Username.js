@@ -27,7 +27,7 @@ export const Username = ({ chatId }) => {
 
   return (
     <div className="username">
-      <div className="name">{username} 😎</div>
+      <div className="name">{username}</div>
       <div className="change-language" onClick={toggleLanguageOptions}>
         <CiSettings />
         {showLanguageOptions && (

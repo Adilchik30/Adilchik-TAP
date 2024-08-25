@@ -5,20 +5,22 @@ import { MdTaskAlt } from "react-icons/md";
 import { AiFillHome } from "react-icons/ai";
 import "./Home.css";
 import { Link, NavLink } from "react-router-dom";
+import Mine from "../mineQism/mineQism";
 
 function Home() {
   const initialCoins = 0;
-  const initialBoostCoins = 100;  // Ensure a reasonable starting value
-  
+  const initialBoostCoins = 100;
+
   const getValidNumber = (value, defaultValue) => {
     const number = Number(value);
     return !isNaN(number) && isFinite(number) ? number : defaultValue;
   };
-  
+
   const [totalProfitPerHour, setTotalProfitPerHour] = useState(() => {
     const savedProfit = localStorage.getItem("totalProfitPerHour");
-    return getValidNumber(savedProfit, 0); // Ensure it defaults to 0
+    return getValidNumber(savedProfit, 0);
   });
+
   const [coins, setCoins] = useState(() => {
     const savedCoins = localStorage.getItem("coins");
     return getValidNumber(savedCoins, initialCoins);
@@ -47,6 +49,26 @@ function Home() {
   };
 
   useEffect(() => {
+    const lastVisit = localStorage.getItem("lastVisit");
+    if (lastVisit) {
+      const elapsedTime = Date.now() - Number(lastVisit);
+      const hoursElapsed = elapsedTime / (1000 * 60 * 60);
+      const profitWhileAway = (totalProfitPerHour / 60) * hoursElapsed;
+      setCoins((prevCoins) => prevCoins + profitWhileAway);
+    }
+  }, [totalProfitPerHour]);
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      localStorage.setItem("lastVisit", Date.now().toString());
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem("coins", coins.toString());
   }, [coins]);
 
@@ -69,19 +91,19 @@ function Home() {
     }
   }, [boostCoins]);
 
-  useEffect(() => {
-    const profitPerMinute = totalProfitPerHour / 60; // Updated to per minute
+ // Use this effect to increment coins based on the total profit per hour
+useEffect(() => {
+  const updateCoinsInterval = setInterval(() => {
+    setCoins((prevTotal) => {
+      const newTotal = prevTotal + (totalProfitPerHour / 1); // Add profit per minute
+      if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
+      return Math.max(newTotal, 0); // Ensure coins do not go below 0
+    });
+  }, 60000); // Update every 1 minute
 
-    const updateCoinsInterval = setInterval(() => {
-      setCoins((prevTotal) => {
-        const newTotal = prevTotal + profitPerMinute;
-        if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
-        return Math.max(newTotal, 0); // Ensure coins do not go below 0
-      });
-    }, 10000); // Update every 10 seconds
+  return () => clearInterval(updateCoinsInterval);
+}, [totalProfitPerHour]);
 
-    return () => clearInterval(updateCoinsInterval);
-  }, [totalProfitPerHour]);
 
   const showClickEffect = (x, y) => {
     setEffects((prevEffects) => [
@@ -97,7 +119,7 @@ function Home() {
 
   const handleImageClick = (e) => {
     if (coins > 0 && boostCoins > 0) {
-      setCoins((prevCoins) => Math.max(prevCoins + 1, 0)); // Decrement coins
+      setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
   
       const imgRect = e.target.getBoundingClientRect();
@@ -114,6 +136,10 @@ function Home() {
         }, 2000); // Hide message after 2 seconds
       }
     }
+  };
+
+  const updateTotalProfitPerHour = (profitPerHour) => {
+    setTotalProfitPerHour((prevProfit) => prevProfit + profitPerHour);
   };
 
   return (
@@ -197,6 +223,7 @@ function Home() {
             +1
           </div>
         ))}
+        <Mine updateTotalProfitPerHour={updateTotalProfitPerHour} />
       </div>
     </div>
   );

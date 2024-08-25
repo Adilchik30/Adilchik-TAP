@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
+.gift_qism {
+    height: 100vh;
+}
 .promocode_image {
   gap: 23px;
   display: flex;

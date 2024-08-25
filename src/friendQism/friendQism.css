@@ -1,3 +1,6 @@
+.friend_part {
+    height: 100vh;
+}
 /* Container for the friend invite section */
 .add_friend_img {
     display: flex;

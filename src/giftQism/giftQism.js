@@ -4,7 +4,7 @@ import million from "../assets/million.jpg";
 import "./giftQism.css";
 const GiftQism = () => {
   return (
-    <div>
+    <div className="gift_qism">
       <br />
       <br />
       <p style={{ textAlign: "center", fontWeight: "bold", fontSize: "20px" }}>
