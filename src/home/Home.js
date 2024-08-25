@@ -85,25 +85,24 @@ function Home() {
       setBoostCoins((prevBoostCoins) => Math.min(prevBoostCoins + 1, 500));
     };
 
-    if (boostCoins <= 500) {
+    if (boostCoins < 500) {
       const id = setInterval(incrementBoostCoins, 600);
       return () => clearInterval(id);
     }
   }, [boostCoins]);
 
- // Use this effect to increment coins based on the total profit per hour
-useEffect(() => {
-  const updateCoinsInterval = setInterval(() => {
-    setCoins((prevTotal) => {
-      const newTotal = prevTotal + (totalProfitPerHour / 1); // Add profit per minute
-      if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
-      return Math.max(newTotal, 0); // Ensure coins do not go below 0
-    });
-  }, 60000); // Update every 1 minute
+  // Use this effect to increment coins based on the total profit per hour
+  useEffect(() => {
+    const updateCoinsInterval = setInterval(() => {
+      setCoins((prevTotal) => {
+        const newTotal = prevTotal + (totalProfitPerHour / 60); // Add profit per minute
+        if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
+        return Math.max(newTotal, 0); // Ensure coins do not go below 0
+      });
+    }, 60000); // Update every 1 minute
 
-  return () => clearInterval(updateCoinsInterval);
-}, [totalProfitPerHour]);
-
+    return () => clearInterval(updateCoinsInterval);
+  }, [totalProfitPerHour]);
 
   const showClickEffect = (x, y) => {
     setEffects((prevEffects) => [
@@ -118,7 +117,7 @@ useEffect(() => {
   };
 
   const handleImageClick = (e) => {
-    if (coins > 0 && boostCoins > 0) {
+    if (boostCoins > 0) { // Only check for boostCoins
       setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
   
