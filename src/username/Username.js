@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { CiSettings } from "react-icons/ci";
-import "./Username.css";
 import axios from "axios";
+import "./Username.css";
 
 export const Username = () => {
-  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
   const [username, setUsername] = useState("Loading...");
   const [chatId, setChatId] = useState(null);
-
-  const toggleLanguageOptions = () => {
-    setShowLanguageOptions(!showLanguageOptions);
-  };
+  const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
   useEffect(() => {
     // Extract chatId from URL
@@ -34,6 +30,10 @@ export const Username = () => {
       setUsername("No chat ID provided");
     }
   }, []);
+
+  const toggleLanguageOptions = () => {
+    setShowLanguageOptions(!showLanguageOptions);
+  };
 
   return (
     <div className="username">
