@@ -147,7 +147,7 @@ function Home() {
           <br />
           <div className="tap_profit_part">
             <div className="profit">
-              <h3>Soatiga tajriba: {numberFormatter.format(totalProfitPerHour)}</h3>
+              <h3>Daqiqalik tajriba: {numberFormatter.format(totalProfitPerHour)}</h3>
             </div>
           </div>
           <div className="tap_all_coins_part">

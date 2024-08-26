@@ -12,13 +12,14 @@ export const Username = () => {
     // Extract chatId from URL
     const urlParams = new URLSearchParams(window.location.search);
     const chatIdFromUrl = urlParams.get('chatId');
+    
     setChatId(chatIdFromUrl);
 
     if (chatIdFromUrl) {
       const fetchUsername = async () => {
         try {
           const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
-          setUsername(response.data.username);
+          setUsername(response.data.username || "Username not available");
         } catch (error) {
           console.error("Error fetching username:", error);
           setUsername("Error fetching username");
