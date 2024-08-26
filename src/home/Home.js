@@ -70,7 +70,6 @@ function Home() {
 
   useEffect(() => {
     localStorage.setItem("coins", coins.toString());
-    console.log('Coins updated in Home:', coins); // Debugging output
   }, [coins]);
 
   useEffect(() => {
