@@ -9,17 +9,16 @@ export const Username = () => {
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
   useEffect(() => {
-    // Extract chatId from URL
     const urlParams = new URLSearchParams(window.location.search);
     const chatIdFromUrl = urlParams.get('chatId');
-    
     setChatId(chatIdFromUrl);
 
     if (chatIdFromUrl) {
+      // Agar chatId bo'lsa, foydalanuvchi ismini olishni boshlang
       const fetchUsername = async () => {
         try {
           const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
-          setUsername(response.data.username || "Username not available");
+          setUsername(response.data.username);
         } catch (error) {
           console.error("Error fetching username:", error);
           setUsername("Error fetching username");
@@ -30,7 +29,7 @@ export const Username = () => {
     } else {
       setUsername("No chat ID provided");
     }
-  }, []);
+  }, [chatId]);
 
   const toggleLanguageOptions = () => {
     setShowLanguageOptions(!showLanguageOptions);
