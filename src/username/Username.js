@@ -9,15 +9,10 @@ export const Username = () => {
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
   useEffect(() => {
-    // Temporarily hardcode chatId for testing
-    const chatIdFromUrl = "5409529185"; // Replace with a valid test chatId
-    setChatId(chatIdFromUrl);
-  }, []);
-  useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const chatIdFromUrl = urlParams.get("chatId");
     setChatId(chatIdFromUrl);
-    
+
     if (chatIdFromUrl) {
       // Fetch first name using the chatId
       const fetchFirstName = async () => {
@@ -42,7 +37,7 @@ export const Username = () => {
     } else {
       setFirstName("😡 no username");
     }
-  }, [chatId]);
+  }, []);
 
   const toggleLanguageOptions = () => {
     setShowLanguageOptions(!showLanguageOptions);

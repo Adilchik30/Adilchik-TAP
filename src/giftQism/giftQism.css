@@ -1,20 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 .gift_qism {
     height: 100vh;
+    overflow: hidden; /* Prevent scrolling */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .promocode_image {
-  gap: 23px;
-  display: flex;
-  justify-content: center;
+    gap: 23px;
+    display: flex;
+    justify-content: center;
 }
+
 .where_and_when {
     gap: 10px;
     display: block;
 }
+
 .where_and_when p {
     text-align: center;
     font-size: 18px;
 }
+
 .where_and_when h2 {
     font-family: 'Roboto', sans-serif;
     text-align: center;

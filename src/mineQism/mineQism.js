@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './mineQism.css';
 
-function Mine({ updateTotalProfitPerHour, coins, setCoins }) {
-  const [errorMessage, setErrorMessage] = useState(''); // State for error message
+function Mine() {
+  const [coins, setCoins] = useState(0);
+  const [totalProfitPerHour, setTotalProfitPerHour] = useState(0);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('coins', coins); // Sync local storage whenever coins change
-  }, [coins]);
+    const savedCoins = Number(localStorage.getItem('coins')) || 0;
+    const savedTotalProfitPerHour = Number(localStorage.getItem('totalProfitPerHour')) || 0;
+    setCoins(savedCoins);
+    setTotalProfitPerHour(savedTotalProfitPerHour);
+  }, []);
 
   const items = [
     {
@@ -45,15 +50,19 @@ function Mine({ updateTotalProfitPerHour, coins, setCoins }) {
 
   const handleBuyItem = (item) => {
     if (coins >= item.cost) {
-      setCoins((prevCoins) => {
-        const newCoins = prevCoins - item.cost;
-        localStorage.setItem('coins', newCoins.toString());
-        return newCoins;
-      });
-      updateTotalProfitPerHour(item.profitPerHour);
-      setErrorMessage(''); // Clear error message after successful purchase
+      const newCoins = coins - item.cost;
+      const newProfitPerHour = totalProfitPerHour + item.profitPerHour;
+
+      setCoins(newCoins);
+      setTotalProfitPerHour(newProfitPerHour);
+
+      // Update localStorage
+      localStorage.setItem('coins', newCoins.toString());
+      localStorage.setItem('totalProfitPerHour', newProfitPerHour.toString());
+
+      setErrorMessage(''); // Clear any previous error message
     } else {
-      setErrorMessage('Yetarli tangangiz yo‘q!'); // Set error message when coins are insufficient
+      setErrorMessage('Yetarli tangangiz yo‘q!');
 
       // Remove the error message after 6 seconds
       setTimeout(() => {

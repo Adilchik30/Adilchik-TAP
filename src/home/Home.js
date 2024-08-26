@@ -54,7 +54,7 @@ function Home() {
       const elapsedTime = Date.now() - Number(lastVisit);
       const hoursElapsed = elapsedTime / (1000 * 60 * 60);
       const profitWhileAway = (totalProfitPerHour / 60) * hoursElapsed;
-      setCoins((prevCoins) => prevCoins + profitWhileAway);
+      setCoins((prevCoins) => prevCoins + profitWhileAway);  // Change "-" to "+" for correct profit addition
     }
   }, [totalProfitPerHour]);
 
@@ -70,6 +70,7 @@ function Home() {
 
   useEffect(() => {
     localStorage.setItem("coins", coins.toString());
+    console.log('Coins updated in Home:', coins); // Debugging output
   }, [coins]);
 
   useEffect(() => {
@@ -103,38 +104,41 @@ function Home() {
     return () => clearInterval(updateCoinsInterval);
   }, [totalProfitPerHour]);
 
-  const showClickEffect = (x, y) => {
-    setEffects((prevEffects) => [
-      ...prevEffects,
-      { x, y, id: Date.now() }
-    ]);
-    setTimeout(() => {
-      setEffects((prevEffects) =>
-        prevEffects.filter((effect) => effect.id !== Date.now())
-      );
-    }, 1000);
-  };
-
   const handleImageClick = (e) => {
-    if (boostCoins > 0) { // Only check for boostCoins
+    if (boostCoins > 0) {
       setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
   
-      const imgRect = e.target.getBoundingClientRect();
-      showClickEffect(
-        e.clientX - imgRect.left,
-        e.clientY - imgRect.top
-      );
+      // Calculate relative coordinates
+      const containerRect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - containerRect.left;
+      const y = e.clientY - containerRect.top;
+  
+      showClickEffect(x, y);
     } else {
       const messageElement = document.getElementById("coins-error");
       if (messageElement) {
         messageElement.style.display = "block";
         setTimeout(() => {
           messageElement.style.display = "none";
-        }, 2000); // Hide message after 2 seconds
+        }, 2000);
       }
     }
   };
+  
+  const showClickEffect = (x, y) => {
+    setEffects((prevEffects) => [
+      ...prevEffects,
+      { x, y, id: Date.now() }
+    ]);
+  
+    setTimeout(() => {
+      setEffects((prevEffects) =>
+        prevEffects.filter((effect) => effect.id !== Date.now())
+      );
+    }, 1000);
+  };
+  
 
   const updateTotalProfitPerHour = (profitPerHour) => {
     setTotalProfitPerHour((prevProfit) => prevProfit + profitPerHour);
@@ -212,20 +216,17 @@ function Home() {
             </NavLink>
           </footer>
         </div>
+         
         {effects.map((effect) => (
-          <div
-            key={effect.id}
-            className="click-effect"
-            style={{ left: effect.x, top: effect.y }}
-          >
-            +1
-          </div>
-        ))}
-        <Mine
-          updateTotalProfitPerHour={updateTotalProfitPerHour}
-          coins={coins}
-          setCoins={setCoins} // Pass setCoins to Mine
-        />
+  <img
+    key={effect.id}
+    src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" // Your desired image URL
+    alt="Effect"
+    className="click-effect"
+    style={{ left: `${effect.x}px`, top: `${effect.y}px` }}
+  />
+))}
+
       </div>
     </div>
   );
