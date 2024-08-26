@@ -4,7 +4,7 @@ import axios from "axios";
 import "./Username.css";
 
 export const Username = () => {
-  const [username, setUsername] = useState("Loading...");
+  const [firstName, setFirstName] = useState("Loading...");
   const [chatId, setChatId] = useState(null);
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
@@ -14,20 +14,20 @@ export const Username = () => {
     setChatId(chatIdFromUrl);
 
     if (chatIdFromUrl) {
-      // Agar chatId bo'lsa, foydalanuvchi ismini olishni boshlang
-      const fetchUsername = async () => {
-        try {
-          const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
-          setUsername(response.data.username);
-        } catch (error) {
-          console.error("Error fetching username:", error);
-          setUsername("Error fetching username");
-        }
-      };
+        // Fetch first name using the chatId
+        const fetchFirstName = async () => {
+            try {
+                const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
+                setFirstName(response.data.firstName);
+            } catch (error) {
+                console.error("Error fetching first name:", error);
+                setFirstName("Error fetching first name");
+            }
+        };
 
-      fetchUsername();
+        fetchFirstName();
     } else {
-      setUsername("No chat ID provided");
+        setFirstName("No chat ID provided");
     }
   }, [chatId]);
 
@@ -37,7 +37,7 @@ export const Username = () => {
 
   return (
     <div className="username">
-      <div className="name">{username}</div>
+      <div className="name">{firstName}</div>
       <div className="change-language" onClick={toggleLanguageOptions}>
         <CiSettings />
         {showLanguageOptions && (
