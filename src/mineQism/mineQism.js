@@ -1,79 +1,98 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './mineQism.css';
 
-function Mine({ updateTotalProfitPerHour }) {
-  const [localCoins, setLocalCoins] = useState(() => {
-    const savedCoins = localStorage.getItem("coins");
-    return Number(savedCoins) || 0;
-  });
+function Mine({ updateTotalProfitPerHour, coins, setCoins }) {
+  const [localCoins, setLocalCoins] = useState(coins);
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
   useEffect(() => {
-    setLocalCoins(() => {
-      const savedCoins = localStorage.getItem("coins");
-      return Number(savedCoins) || 0;
-    });
-  }, []);
+    setLocalCoins(coins);
+  }, [coins]);
 
   useEffect(() => {
-    localStorage.setItem("coins", localCoins.toString());
+    localStorage.setItem('coins', localCoins.toString());
   }, [localCoins]);
 
   const items = [
     {
       id: 1,
-      name: 'Tajriba Oltin',
-      cost: 100,
-      profitPerHour: 10,
-      description: 'Eng yuqori darajadagi tajriba oltin.',
-      image: 'path/to/gold-icon.png',
+      name: 'Shaxsiy brend',
+      cost: 1000,
+      profitPerHour: 100,
+      image:
+        'https://www.shutterstock.com/image-vector/business-success-3d-vector-illustration-600nw-2191410963.jpg',
     },
     {
       id: 2,
-      name: 'Tajriba Kumush',
-      cost: 50,
-      profitPerHour: 5,
-      description: 'O\'rtacha darajadagi tajriba kumush.',
-      image: 'path/to/silver-icon.png',
+      name: 'Muzokaralar olib borish',
+      cost: 500,
+      profitPerHour: 54,
+      image:
+        'https://t3.ftcdn.net/jpg/02/81/17/24/360_F_281172401_hoQeqc81IQ5dLOJWYigiBogo3RtUS8F0.jpg',
     },
     {
       id: 3,
-      name: 'Tajriba Mis',
-      cost: 10,
-      profitPerHour: 1,
-      description: 'Past darajadagi tajriba mis.',
-      image: 'path/to/bronze-icon.png',
+      name: 'Vazifalarni topshirish',
+      cost: 2500,
+      profitPerHour: 240,
+      image:
+        'https://static.vecteezy.com/system/resources/previews/002/922/273/original/cute-successful-businessman-complete-the-task-cartoon-icon-illustration-free-vector.jpg',
+    },
+    {
+      id: 4,
+      name: "So'zga chiqish uchun",
+      cost: 6000,
+      profitPerHour: 1000,
+      image:
+        'https://t3.ftcdn.net/jpg/02/80/83/80/360_F_280838006_jjP9vcYiJHnjBlkuYdMuHSxvirB6chPC.jpg',
     },
   ];
 
   const handleBuyItem = (item) => {
     if (localCoins >= item.cost) {
-      setLocalCoins(localCoins - item.cost);
-      updateTotalProfitPerHour(item.profitPerHour); // Update the total profit per hour
+      setCoins((prevCoins) => {
+        const newCoins = prevCoins - item.cost;
+        localStorage.setItem('coins', newCoins.toString());
+        return newCoins;
+      });
+      updateTotalProfitPerHour(item.profitPerHour);
+      setErrorMessage(''); // Clear error message after successful purchase
     } else {
-      alert('Yetarli tangangiz yo\'q!');
+      setErrorMessage('Yetarli tangangiz yo‘q!'); // Set error message when coins are insufficient
+
+      // Remove the error message after 6 seconds
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 6000);
     }
   };
-  
 
   return (
     <div className="mine-container">
-      <h1>Tajriba sotib olish</h1>
+      {/* Display error message at the top if there is one */}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
       <div className="items-list">
         {items.map((item) => (
           <div key={item.id} className="item-card">
             <img src={item.image} alt={item.name} className="item-image" />
             <div className="item-details">
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <p>Narx: {item.cost} tangalar</p>
-              <p>Soatlik daromad: {item.profitPerHour} tanga</p>
-              <button onClick={() => handleBuyItem(item)}>Sotib olish</button>
+              <h2 className="item-name">{item.name}</h2>
+              <p className="item-profit">Soatiga tajriba: +{item.profitPerHour}</p>
+              <div className="item-cost">
+                <img
+                  src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png"
+                  alt="Coin Icon"
+                  className="coin-icon"
+                />
+                <span>{item.cost}</span>
+              </div>
+              <button className="item-button" onClick={() => handleBuyItem(item)}>
+                Sotib olish
+              </button>
             </div>
           </div>
         ))}
-      </div>
-      <div className="coins-display">
-        <h2>Sizda {localCoins} tanga bor</h2>
       </div>
     </div>
   );

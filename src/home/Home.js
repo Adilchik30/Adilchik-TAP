@@ -91,11 +91,10 @@ function Home() {
     }
   }, [boostCoins]);
 
-  // Use this effect to increment coins based on the total profit per hour
   useEffect(() => {
     const updateCoinsInterval = setInterval(() => {
       setCoins((prevTotal) => {
-        const newTotal = prevTotal + (totalProfitPerHour / 60); // Add profit per minute
+        const newTotal = prevTotal + (totalProfitPerHour / 1); // Add profit per minute
         if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
         return Math.max(newTotal, 0); // Ensure coins do not go below 0
       });
@@ -222,7 +221,11 @@ function Home() {
             +1
           </div>
         ))}
-        <Mine updateTotalProfitPerHour={updateTotalProfitPerHour} />
+        <Mine
+          updateTotalProfitPerHour={updateTotalProfitPerHour}
+          coins={coins}
+          setCoins={setCoins} // Pass setCoins to Mine
+        />
       </div>
     </div>
   );
