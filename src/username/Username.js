@@ -5,14 +5,13 @@ import "./Username.css";
 
 export const Username = () => {
   const [firstName, setFirstName] = useState("Loading...");
-  const [chatId, setChatId] = useState(null);
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const chatIdFromUrl = urlParams.get("chatId");
-    setChatId(chatIdFromUrl);
-
+    console.log("Chat ID from URL:", chatIdFromUrl);  // Debugging log
+  
     if (chatIdFromUrl) {
       // Fetch first name using the chatId
       const fetchFirstName = async () => {
@@ -20,7 +19,7 @@ export const Username = () => {
           const response = await axios.get(
             `https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`
           );
-          console.log("API Response:", response);
+          console.log("API Response:", response); // Debugging log
           if (response.data && response.data.firstName) {
             const name = response.data.firstName.trim();
             setFirstName(name || "First name not available");
@@ -32,12 +31,13 @@ export const Username = () => {
           setFirstName("Error fetching first name");
         }
       };
-
+  
       fetchFirstName();
     } else {
       setFirstName("😡 no username");
     }
   }, []);
+  
 
   const toggleLanguageOptions = () => {
     setShowLanguageOptions(!showLanguageOptions);
