@@ -18,7 +18,8 @@ export const Username = () => {
         const fetchFirstName = async () => {
             try {
                 const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
-                setFirstName(response.data.firstName);
+                const name = response.data.firstName.trim(); // Use trim() to handle any extra spaces
+                setFirstName(name || "First name not available"); // Handle empty values
             } catch (error) {
                 console.error("Error fetching first name:", error);
                 setFirstName("Error fetching first name");
