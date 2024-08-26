@@ -9,26 +9,38 @@ export const Username = () => {
   const [showLanguageOptions, setShowLanguageOptions] = useState(false);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const chatIdFromUrl = urlParams.get('chatId');
+    // Temporarily hardcode chatId for testing
+    const chatIdFromUrl = "5409529185"; // Replace with a valid test chatId
     setChatId(chatIdFromUrl);
-
+  }, []);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const chatIdFromUrl = urlParams.get("chatId");
+    setChatId(chatIdFromUrl);
+    
     if (chatIdFromUrl) {
-        // Fetch first name using the chatId
-        const fetchFirstName = async () => {
-            try {
-                const response = await axios.get(`https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`);
-                const name = response.data.firstName.trim(); // Use trim() to handle any extra spaces
-                setFirstName(name || "First name not available"); // Handle empty values
-            } catch (error) {
-                console.error("Error fetching first name:", error);
-                setFirstName("Error fetching first name");
-            }
-        };
+      // Fetch first name using the chatId
+      const fetchFirstName = async () => {
+        try {
+          const response = await axios.get(
+            `https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`
+          );
+          console.log("API Response:", response);
+          if (response.data && response.data.firstName) {
+            const name = response.data.firstName.trim();
+            setFirstName(name || "First name not available");
+          } else {
+            setFirstName("First name not available");
+          }
+        } catch (error) {
+          console.error("Error fetching first name:", error.message);
+          setFirstName("Error fetching first name");
+        }
+      };
 
-        fetchFirstName();
+      fetchFirstName();
     } else {
-        setFirstName("No chat ID provided");
+      setFirstName("😡 no username");
     }
   }, [chatId]);
 

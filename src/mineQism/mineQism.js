@@ -2,22 +2,17 @@ import React, { useEffect, useState } from 'react';
 import './mineQism.css';
 
 function Mine({ updateTotalProfitPerHour, coins, setCoins }) {
-  const [localCoins, setLocalCoins] = useState(coins);
   const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
   useEffect(() => {
-    setLocalCoins(coins);
+    localStorage.setItem('coins', coins); // Sync local storage whenever coins change
   }, [coins]);
-
-  useEffect(() => {
-    localStorage.setItem('coins', localCoins.toString());
-  }, [localCoins]);
 
   const items = [
     {
       id: 1,
       name: 'Shaxsiy brend',
-      cost: 1000,
+      cost: 10,
       profitPerHour: 100,
       image:
         'https://www.shutterstock.com/image-vector/business-success-3d-vector-illustration-600nw-2191410963.jpg',
@@ -49,7 +44,7 @@ function Mine({ updateTotalProfitPerHour, coins, setCoins }) {
   ];
 
   const handleBuyItem = (item) => {
-    if (localCoins >= item.cost) {
+    if (coins >= item.cost) {
       setCoins((prevCoins) => {
         const newCoins = prevCoins - item.cost;
         localStorage.setItem('coins', newCoins.toString());
