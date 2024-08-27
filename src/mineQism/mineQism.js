@@ -4,7 +4,6 @@ import './mineQism.css';
 function Mine() {
   const [coins, setCoins] = useState(0);
   const [totalProfitPerHour, setTotalProfitPerHour] = useState(0);
-  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const savedCoins = Number(localStorage.getItem('coins')) || 0;
@@ -46,10 +45,20 @@ function Mine() {
       image:
         'https://t3.ftcdn.net/jpg/02/80/83/80/360_F_280838006_jjP9vcYiJHnjBlkuYdMuHSxvirB6chPC.jpg',
     },
+    {
+      id: 5,
+      name: "So'zga chiqish uchun",
+      cost: 6000,
+      profitPerHour: 1000,
+      image:
+        'https://t3.ftcdn.net/jpg/02/80/83/80/360_F_280838006_jjP9vcYiJHnjBlkuYdMuHSxvirB6chPC.jpg',
+    },
   ];
 
+  const canAfford = (cost) => coins >= cost;
+
   const handleBuyItem = (item) => {
-    if (coins >= item.cost) {
+    if (canAfford(item.cost)) {
       const newCoins = coins - item.cost;
       const newProfitPerHour = totalProfitPerHour + item.profitPerHour;
 
@@ -59,23 +68,11 @@ function Mine() {
       // Update localStorage
       localStorage.setItem('coins', newCoins.toString());
       localStorage.setItem('totalProfitPerHour', newProfitPerHour.toString());
-
-      setErrorMessage(''); // Clear any previous error message
-    } else {
-      setErrorMessage('Yetarli tangangiz yo‘q!');
-
-      // Remove the error message after 6 seconds
-      setTimeout(() => {
-        setErrorMessage('');
-      }, 6000);
     }
   };
 
   return (
     <div className="mine-container">
-      {/* Display error message at the top if there is one */}
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
       <div className="items-list">
         {items.map((item) => (
           <div key={item.id} className="item-card">
@@ -91,7 +88,15 @@ function Mine() {
                 />
                 <span>{item.cost}</span>
               </div>
-              <button className="item-button" onClick={() => handleBuyItem(item)}>
+              <button
+                className="item-button"
+                onClick={() => handleBuyItem(item)}
+                disabled={!canAfford(item.cost)}
+                style={{
+                  backgroundColor: canAfford(item.cost) ? '#28a745' : '#ddd',
+                  cursor: canAfford(item.cost) ? 'pointer' : 'not-allowed',
+                }}
+              >
                 Sotib olish
               </button>
             </div>

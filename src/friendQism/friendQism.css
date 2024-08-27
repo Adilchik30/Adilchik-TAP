@@ -72,27 +72,24 @@
 }
 
 .add_friend h2 {
-    text-align: center;
+    margin-top: 20px;
+    text-align: start;
     font-family: 'Roboto', sans-serif;
 }
 
 .add_friend p {
-    font-size: 17px;
+    font-size: 15px;
     text-align: center;
 }
 
 .refresh_part {
     align-items: center;
     display: flex;
-    margin-left: 150px;
-    justify-content: space-between;
 }
 
 .refresh_part p {
     font-size: 18px;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
+    text-align: start;
     font-weight: 700;
 }
 
@@ -102,7 +99,7 @@
 }
 
 .friend_list span {
-    margin-left: 120px;
+    text-align: start;
     font-size: 13px;
 }
 
@@ -110,7 +107,9 @@
 .copy_part {
     align-items: center;
     display: flex;
-    max-width: 300px;
+    position: relative;
+    top: 270px;
+    max-width: 400px;
     align-items: center;
     justify-content: center;
 }

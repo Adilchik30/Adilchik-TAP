@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import "./friendQism.css";
-import { FiRefreshCcw, FiRefreshCw, FiCopy } from "react-icons/fi";
+import { FiCopy } from "react-icons/fi";
 
 const FriendQism = () => {
-  const [copySuccess, setCopySuccess] = useState('');
+  const [copySuccess, setCopySuccess] = useState("");
   const link = "adilchik-tap.vercel.app";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link).then(() => {
-      setCopySuccess('Nusxa olindi!');
+      setCopySuccess("Nusxa olindi!");
     });
   };
 
   return (
-    <div className='friend_part'>
+    <div className="friend_part">
       <div className="add_friend">
         <h2>Do'stlaringizni taklif qiling!</h2>
         <p>Do'stingiz darajasi oshgani uchun darhol +5K va bonuslar olasiz</p>
@@ -36,7 +36,8 @@ const FriendQism = () => {
         </div>
         <span>Siz hali hech kimni taklif qilmagansiz</span>
       </div>
-      <br /><br />
+      <br />
+      <br />
       <div className="copy_part">
         <input type="text" value={link} readOnly className="copy_input" />
         <button onClick={copyToClipboard} className="copy_button">

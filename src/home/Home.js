@@ -34,8 +34,8 @@ function Home() {
   const [effects, setEffects] = useState([]);
   const containerRef = useRef(null);
 
-  const numberFormatter = new Intl.NumberFormat('en-US', {
-    style: 'decimal',
+  const numberFormatter = new Intl.NumberFormat("en-US", {
+    style: "decimal",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -54,7 +54,7 @@ function Home() {
       const elapsedTime = Date.now() - Number(lastVisit);
       const hoursElapsed = elapsedTime / (1000 * 60 * 60);
       const profitWhileAway = (totalProfitPerHour / 60) * hoursElapsed;
-      setCoins((prevCoins) => prevCoins + profitWhileAway);  // Change "-" to "+" for correct profit addition
+      setCoins((prevCoins) => prevCoins + profitWhileAway); // Change "-" to "+" for correct profit addition
     }
   }, [totalProfitPerHour]);
 
@@ -94,7 +94,7 @@ function Home() {
   useEffect(() => {
     const updateCoinsInterval = setInterval(() => {
       setCoins((prevTotal) => {
-        const newTotal = prevTotal + (totalProfitPerHour / 1); // Add profit per minute
+        const newTotal = prevTotal + totalProfitPerHour / 1; // Add profit per minute
         if (!isFinite(newTotal)) return prevTotal; // Prevent infinity
         return Math.max(newTotal, 0); // Ensure coins do not go below 0
       });
@@ -107,12 +107,12 @@ function Home() {
     if (boostCoins > 0) {
       setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
-  
+
       // Calculate relative coordinates
       const containerRect = containerRef.current.getBoundingClientRect();
       const x = e.clientX - containerRect.left;
       const y = e.clientY - containerRect.top;
-  
+
       showClickEffect(x, y);
     } else {
       const messageElement = document.getElementById("coins-error");
@@ -124,20 +124,16 @@ function Home() {
       }
     }
   };
-  
+
   const showClickEffect = (x, y) => {
-    setEffects((prevEffects) => [
-      ...prevEffects,
-      { x, y, id: Date.now() }
-    ]);
-  
+    setEffects((prevEffects) => [...prevEffects, { x, y, id: Date.now() }]);
+
     setTimeout(() => {
       setEffects((prevEffects) =>
         prevEffects.filter((effect) => effect.id !== Date.now())
       );
     }, 1000);
   };
-  
 
   const updateTotalProfitPerHour = (profitPerHour) => {
     setTotalProfitPerHour((prevProfit) => prevProfit + profitPerHour);
@@ -148,20 +144,25 @@ function Home() {
       <div className="tap_part">
         <div className="username_and_tap">
           <br />
-          <div className="tap_profit_part">
-            <div className="profit">
-              <h3>Daqiqalik tajriba: {numberFormatter.format(totalProfitPerHour)}</h3>
+          <div className="tap_and_profit">
+            <div className="tap_profit_part">
+              <div className="profit">
+                <h3>
+                  Daqiqalik tajriba:{" "}
+                  {numberFormatter.format(totalProfitPerHour)}
+                </h3>
+              </div>
             </div>
-          </div>
-          <div className="tap_all_coins_part">
-            <div>
-              <img
-                src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png"
-                alt="Logo"
-                onClick={handleImageClick}
-              />
-              <p>{Math.floor(coins)}</p>
-              <br />
+            <div className="tap_all_coins_part">
+              <div>
+                <img
+                  src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png"
+                  alt="Logo"
+                  onClick={handleImageClick}
+                />
+                <p>{Math.floor(coins)}</p>
+                <br />
+              </div>
             </div>
           </div>
           <div className="big_tap_btn_part">
@@ -179,35 +180,42 @@ function Home() {
               </div>
             </div>
           </div>
-          <div id="coins-error" style={{ display: 'none', color: 'red', textAlign: "center" }}>
+          <div
+            id="coins-error"
+            style={{ display: "none", color: "red", textAlign: "center" }}
+          >
             Kuchaytirish uchun yetarli tanga yo'q!
           </div>
           <footer className="footer">
-            <Link to="/">
+            <NavLink to="/">
               <div className="footer-item">
                 <AiFillHome />
                 {t.exchange}
               </div>
-            </Link>
-            <Link to="/mineCart">
+            </NavLink>
+            <NavLink to="/mineCart">
               <div className="footer-item">
                 <FaMoneyBill />
                 {t.mine}
               </div>
-            </Link>
-            <Link to="/addFriend">
+            </NavLink>
+            <NavLink to="/addFriend">
               <div className="footer-item">
                 <FaPeoplePulling />
                 {t.friends}
               </div>
-            </Link>
-            <Link to="/earnPart">
+            </NavLink>
+            <NavLink to="/earnPart">
               <div className="footer-item">
                 <MdTaskAlt />
                 {t.earn}
               </div>
-            </Link>
-            <NavLink className="navlink" to="/giftPart">
+            </NavLink>
+            <NavLink
+              className="navlink"
+              activeClassName="active"
+              to="/giftPart"
+            >
               <div className="footer-item">
                 <FaGift />
                 {t.airdrop}
@@ -215,17 +223,16 @@ function Home() {
             </NavLink>
           </footer>
         </div>
-         
-        {effects.map((effect) => (
-  <img
-    key={effect.id}
-    src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" // Your desired image URL
-    alt="Effect"
-    className="click-effect"
-    style={{ left: `${effect.x}px`, top: `${effect.y}px` }}
-  />
-))}
 
+        {effects.map((effect) => (
+          <img
+            key={effect.id}
+            src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" // Your desired image URL
+            alt="Effect"
+            className="click-effect"
+            style={{ left: `${effect.x}px`, top: `${effect.y}px` }}
+          />
+        ))}
       </div>
     </div>
   );
