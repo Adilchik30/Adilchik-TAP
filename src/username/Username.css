@@ -23,13 +23,14 @@
   }
   
   .change-language {
+    height: 42px;
     position: relative;
     cursor: pointer;
   }
   
   .change-language svg {
     width: 30px;
-    height: 30px;
+    height: 40px;
   }
   
   .language-options {
@@ -48,7 +49,7 @@
   .language-options div {
     padding: 10px;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
+    transition: 0.2s ease-in-out;
   }
   
   .language-options div:hover {

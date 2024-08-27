@@ -105,7 +105,7 @@ function Home() {
 
   const handleImageClick = (e) => {
     if (boostCoins > 0) {
-      setCoins((prevCoins) => Math.max(prevCoins + 1, 0));
+      setCoins((prevCoins) => Math.max(prevCoins + 3, 0));
       setBoostCoins((prevBoostCoins) => Math.max(prevBoostCoins - 1, 0));
 
       // Calculate relative coordinates
@@ -141,18 +141,24 @@ function Home() {
 
   return (
     <div className="tap_container" ref={containerRef}>
-      <div className="tap_part">
         <div className="username_and_tap">
+      <div className="tap_part">
           <br />
           <div className="tap_and_profit">
             <div className="tap_profit_part">
               <div className="profit">
                 <h3>
-                  Daqiqalik tajriba:{" "}
-                  {numberFormatter.format(totalProfitPerHour)}
+                  Bosganda tajriba: <br />+3
+                </h3>
+              </div>
+              <div className="profit">
+                <h3>
+                  Daqiqalik tajriba: <br />{" "}
+                  {(totalProfitPerHour)}
                 </h3>
               </div>
             </div>
+
             <div className="tap_all_coins_part">
               <div>
                 <img
@@ -227,7 +233,7 @@ function Home() {
         {effects.map((effect) => (
           <img
             key={effect.id}
-            src="https://static.tildacdn.com/tild3534-6332-4033-a134-333334376266/uzum-logo-icon.png" // Your desired image URL
+            src="https://beincrypto.com/wp-content/uploads/2024/06/hamster-coin.png.webp" // Your desired image URL
             alt="Effect"
             className="click-effect"
             style={{ left: `${effect.x}px`, top: `${effect.y}px` }}

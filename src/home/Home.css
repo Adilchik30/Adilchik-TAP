@@ -14,7 +14,10 @@
   padding: 20px;
   overflow: hidden; /* Prevent scrolling */
 }
-
+.tap_profit_part {
+  display: flex;
+  gap: 10px;
+}
 .username_and_tap {
   height: 100vh;
   background: white;
@@ -34,10 +37,12 @@
   padding-bottom: 0px;
   text-align: center;
 }
-
+.tap_profit_part .profit:nth-of-type(2) {
+  background: rgb(255, 228, 233);
+}
 .profit {
   border-radius: 15px;
-  width: 300px;
+  max-width: 200px;
   height: 80px;
   align-items: center;
   margin: auto;
@@ -46,11 +51,11 @@
   justify-content: center;
   display: flex;
   gap: 10px;
-  background: rgb(182, 255, 250);
+  background: rgb(208, 255, 252);
 }
 
 .profit h3 {
-  font-size: 1.3em;
+  font-size: 1.2em;
   color: black;
 }
 
@@ -90,14 +95,43 @@
 
 .click-effect {
   position: absolute;
-  background-color: #ddd;
-  color: #000;
   font-size: 1.5rem;
   padding: 5px;
   border-radius: 50%;
   pointer-events: none;
-  transition: opacity 1s;
-  opacity: 1;
+  opacity: 0.2;
+}
+.progress_part {
+  width: 100%;
+  max-width: 450px; /* Adjust to fit within your layout */
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.uzum_progress_container {
+  width: 100%;
+  height: 30px;
+  background-color: #f0f0f0; /* Light background for contrast */
+  border-radius: 15px;
+  overflow: hidden; /* Ensure the fill remains within the rounded border */
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Adds subtle depth */
+}
+
+.uzum_progress_fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7d7aff, #b8ff6b); /* Gradient from purple to green */
+  border-radius: 15px 0 0 15px; /* Matches the rounded corners of the container */
+  transition: width 0.4s ease-in-out; /* Smooth width transition */
+}
+
+.uzum_progress_text {
+  margin-top: 10px;
+  font-size: 1em;
+  color: #333; /* Dark grey text for contrast */
+  font-weight: bold;
 }
 
 @keyframes clickEffectAnimation {
