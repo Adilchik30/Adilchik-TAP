@@ -73,23 +73,26 @@
 
 .add_friend h2 {
     margin-top: 20px;
-    text-align: start;
+    text-align: center;
+    font-size: 15px;
     font-family: 'Roboto', sans-serif;
 }
 
 .add_friend p {
-    font-size: 15px;
+    font-size: 12px;
     text-align: center;
 }
 
 .refresh_part {
-    align-items: center;
-    display: flex;
+    display: flex; /* Use flexbox layout */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100%; /* Make sure the height is set if you want vertical centering */
 }
 
 .refresh_part p {
     font-size: 18px;
-    text-align: start;
+    text-align: center;
     font-weight: 700;
 }
 
@@ -99,9 +102,11 @@
 }
 
 .friend_list span {
-    text-align: start;
+    display: block; /* Make span a block-level element */
+    text-align: center; /* Center text inside the span */
+    margin: 0 auto; /* Center the block itself horizontally */
     font-size: 13px;
-}
+  }
 
 /* Copy part */
 .copy_part {

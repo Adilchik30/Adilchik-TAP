@@ -45,14 +45,6 @@ function Mine() {
       image:
         'https://t3.ftcdn.net/jpg/02/80/83/80/360_F_280838006_jjP9vcYiJHnjBlkuYdMuHSxvirB6chPC.jpg',
     },
-    {
-      id: 5,
-      name: "So'zga chiqish uchun",
-      cost: 6000,
-      profitPerHour: 1000,
-      image:
-        'https://t3.ftcdn.net/jpg/02/80/83/80/360_F_280838006_jjP9vcYiJHnjBlkuYdMuHSxvirB6chPC.jpg',
-    },
   ];
 
   const canAfford = (cost) => coins >= cost;
