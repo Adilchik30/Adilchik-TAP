@@ -46,12 +46,12 @@
   justify-content: center;
   display: flex;
   gap: 10px;
-  background: rgb(255, 252, 163);
+  background: rgb(182, 255, 250);
 }
 
 .profit h3 {
   font-size: 1.3em;
-  color: #333;
+  color: black;
 }
 
 .tap_and_profit {
@@ -59,6 +59,7 @@
 }
 
 .tap_all_coins_part {
+  margin-top: 30px;
   justify-content: center;
   display: flex;
   align-items: center;

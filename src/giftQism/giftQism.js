@@ -26,7 +26,7 @@ const GiftQism = () => {
       <br />
       <div className="where_and_when">
         <h2>Qayerda va qachon</h2>
-        <p>Har dushanba @uzumbosnews Telegram kanalida</p>
+        <p>Har dushanba @uzumbosnews Telegramda</p>
       </div>
       <br />
       <div className="where_and_when">
