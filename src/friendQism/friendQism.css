@@ -84,11 +84,15 @@
 .refresh_part {
     align-items: center;
     display: flex;
+    margin-left: 150px;
     justify-content: space-between;
 }
 
 .refresh_part p {
     font-size: 18px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
     font-weight: 700;
 }
 
@@ -98,6 +102,7 @@
 }
 
 .friend_list span {
+    margin-left: 120px;
     font-size: 13px;
 }
 
@@ -105,17 +110,19 @@
 .copy_part {
     align-items: center;
     display: flex;
-    max-width: 500px;
+    max-width: 300px;
     align-items: center;
     justify-content: center;
 }
 
 .copy_input {
+    justify-content: center;
     width: 70%;
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-right: 10px;
+    margin-left: 80px;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -124,6 +131,7 @@
     color: white;
     height: 29px;
     border: none;
+    justify-content: center;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;

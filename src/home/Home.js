@@ -179,7 +179,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div id="coins-error" style={{ display: 'none', color: 'red' }}>
+          <div id="coins-error" style={{ display: 'none', color: 'red', textAlign: "center" }}>
             Kuchaytirish uchun yetarli tanga yo'q!
           </div>
           <footer className="footer">

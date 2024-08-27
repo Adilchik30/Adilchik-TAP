@@ -20,11 +20,13 @@
 }
 
 .where_and_when p {
-    text-align: center;
+    text-align: start;
+    margin-left: 10px;
     font-size: 18px;
 }
 
 .where_and_when h2 {
     font-family: 'Roboto', sans-serif;
-    text-align: center;
+    text-align: start;
+    margin-left: 10px;
 }

@@ -4,7 +4,7 @@ import { FiRefreshCcw, FiRefreshCw, FiCopy } from "react-icons/fi";
 
 const FriendQism = () => {
   const [copySuccess, setCopySuccess] = useState('');
-  const link = "https://youtube.com";
+  const link = "adilchik-tap.vercel.app";
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(link).then(() => {

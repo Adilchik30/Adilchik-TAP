@@ -10,19 +10,16 @@ export const Username = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const chatIdFromUrl = urlParams.get("chatId");
-    console.log("Chat ID from URL:", chatIdFromUrl);  // Debugging log
-  
+
     if (chatIdFromUrl) {
-      // Fetch first name using the chatId
       const fetchFirstName = async () => {
         try {
           const response = await axios.get(
-            `https://adilchik-tap.vercel.app/api/get-username/${chatIdFromUrl}`
+            `/api/get-username/${chatIdFromUrl}`
           );
-          console.log("API Response:", response); // Debugging log
+
           if (response.data && response.data.firstName) {
-            const name = response.data.firstName.trim();
-            setFirstName(name || "First name not available");
+            setFirstName(response.data.firstName.trim());
           } else {
             setFirstName("First name not available");
           }
@@ -31,13 +28,12 @@ export const Username = () => {
           setFirstName("Error fetching first name");
         }
       };
-  
+
       fetchFirstName();
     } else {
       setFirstName("😡 no username");
     }
   }, []);
-  
 
   const toggleLanguageOptions = () => {
     setShowLanguageOptions(!showLanguageOptions);
@@ -52,7 +48,6 @@ export const Username = () => {
           <div className="language-options">
             <div>Русский</div>
             <div>O'zbek</div>
-            {/* Add more languages as needed */}
           </div>
         )}
       </div>
